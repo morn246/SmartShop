@@ -43,9 +43,9 @@ class ConnectionDB:
             conn.server_info()            
             db= conn["SmartShop"]
             self.collectionUser= db["Users"]
-            self.user=self.Login()
+            self.user=self.login()
             self.collectionShopList= db["ShopList"]
-            self.collectionShopListItemt= db["ShopListItem"]
+            self.collectionShopListItem= db["ShopListItem"]
             
         except Exception as e:
             print("Error connection \n ", e)
@@ -58,7 +58,7 @@ class ConnectionDB:
                 if(res["passw"]==user.passw):
                     return True
             return False
-    def Login(self):
+    def login(self):
         i=0;        
         while(i<3):
             user=ShopClass.User()
@@ -70,11 +70,11 @@ class ConnectionDB:
         raise "שלושת הנסיונות להתחבר שגויים יוצא מהמערכת"
         
 
-    def CreateList(self,s):
+    def createList(self,s):
         #s=ShopClass.ShoppList(self.ConnectionDB)
         shopListItem={"_id":s.id,"shoppingDate":s.shoppingDate,"sumPrice":s.sumPrice,"actualPrice":s.actualPrice}       
         self.collectionShopList.insert_one(shopListItem)
-        print("finish")
+        print("רשימת קניות נוצרה בהצלחה","מחיר של הרשימה",int(s.sumPrice),"מחיר בפועל",s.actualPrice,)
         
 
     def calPrice(self,NameP):
@@ -87,12 +87,11 @@ class ConnectionDB:
             return self.Dict[NameP][1]
         return ""
     def find(self):
-        p=self.collectionShopListItemt.find({},{"name":""}) 
+        p=self.collectionShopListItem.find({},{"name":""}) 
 
-    def printList(self):
-        #post_count = self.collectionShopListItemt.count_documents({})  
+    def printList(self):  
         i=0
-        results= self.collectionShopListItemt.find({"isDone":False})  
+        results= self.collectionShopListItem.find({"isDone":False})  
         for r in results:
             i+=1
             print(" ",r["name"]," ",r["price"])#),r["date"])  
@@ -100,19 +99,19 @@ class ConnectionDB:
     def addItemList(self):
         s= ShopClass.ShopListItem(self.user)
         shopItem={"id":s.id,"date":s.date,"name":s.name,"price":self.calPrice(s.name),"quantity":s.quantity,"user":(s.user).name,"Det":self.getDet(s.name),"ShoppingDate":s.shoppingDate,"isDone":s.isDone}       
-        self.collectionShopListItemt.insert_one(shopItem)
+        self.collectionShopListItem.insert_one(shopItem)
     
     def delItemList(self):
         name = input("Enter name for delete:")
-        self.collectionShopListItemt.delete_one({"name" : name})
+        self.collectionShopListItem.delete_one({"name" : name})
 
     def upItemList(self,ID,name,change):
-        #name = input("Enter name for update:")
-        #name1=input("Enter new price")
-        print(ID,name,change)
-        self.collectionShopListItemt.update_one({"id":ID},{"$set": {str(name):change}})
+        filter = { "name": ID }
+        newvalues = { "$set": { name: change } }
+        self.collectionShopListItem.update_one(filter, newvalues)
+        #self.collectionShopListItem.update_one({"name":ID},{"$set": {str(name):change}})
 
     def delAllItemList(self):        
-        self.collectionShopListItemt.delete_many({})
+        self.collectionShopListItem.delete_many({})
 
    
