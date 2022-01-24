@@ -79,7 +79,7 @@ class User:
                   
 
     def addUser(self,Con):       
-        u={"name":self.name,"passw":self.passw,"id":self.id}
+        u={"id":self.id,"name":self.name,"passw":self.passw}
         Con.collectionUser.insert_one(u)
             
  

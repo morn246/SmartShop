@@ -12,12 +12,12 @@ import datetime
 
 def menu():    
     while True:        
-        print("1 הצג את הרשימה קניות הנוכחית", 
-        "\n" , "2  תוסיף עוד פריט לרשימה",        
-        "\n"  , "3 תעדכן מחיר פריט ברשימה",        
-        "\n"      , "4 תמחק ", 
-        "\n"      , "5 ,רשימת קניות נוצרה ",        
-        "\n" ,  "6 עדכן רשימת תקציב","\n") 
+        print("1- View the current shopping list", 
+        "\n" , "2- Add another item to the list",        
+        "\n"  , "3- Update the price of a particular item",        
+        "\n"      , "4- Delete the item", 
+        "\n"      , "5- Update the budget of the shopping list",        
+        "\n" ,  "6- Exit","\n") 
         try:
             chose= int(input())  
             if(1== chose):

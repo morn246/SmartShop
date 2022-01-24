@@ -66,15 +66,15 @@ class ConnectionDB:
             if(self.verify(user)):
                 return user
             else:
-                print("הסיסמא או המשתמש שגויים נסה שוב")
-        raise "שלושת הנסיונות להתחבר שגויים יוצא מהמערכת"
+                print("Incorrect password or user Try again ")
+        raise "The 3 attempts to connect fail out of the system"
         
 
     def createList(self,s):
         #s=ShopClass.ShoppList(self.ConnectionDB)
-        shopListItem={"_id":s.id,"shoppingDate":s.shoppingDate,"sumPrice":s.sumPrice,"actualPrice":s.actualPrice}       
+        shopListItem={"id":s.id,"shoppingDate":s.shoppingDate,"sumPrice":s.sumPrice,"actualPrice":s.actualPrice}       
         self.collectionShopList.insert_one(shopListItem)
-        print("רשימת קניות נוצרה בהצלחה","מחיר של הרשימה",int(s.sumPrice),"מחיר בפועל",s.actualPrice,)
+        print("Budget updated successfully","The price according to the list ",int(s.sumPrice),"The actual price",s.actualPrice,)
         
 
     def calPrice(self,NameP):
@@ -95,7 +95,7 @@ class ConnectionDB:
         for r in results:
             i+=1
             print(" ",r["name"]," ",r["price"])#),r["date"])  
-        print("מספר הפרטים ברשימה ",": ",i)
+        print("The number of items in the list  ",": ",i)
     def addItemList(self):
         s= ShopClass.ShopListItem(self.user)
         shopItem={"id":s.id,"date":s.date,"name":s.name,"price":self.calPrice(s.name),"quantity":s.quantity,"user":(s.user).name,"Det":self.getDet(s.name),"ShoppingDate":s.shoppingDate,"isDone":s.isDone}       
