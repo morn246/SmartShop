@@ -6,6 +6,7 @@ Created on Wed Dec 29 13:08:25 2021
 """
 import datetime 
 import itertools
+
 # import enum
   
 # # creating enumerations using class
@@ -27,7 +28,7 @@ class ShoppList:
 
          self.Con=Con
          self.collectionShopListItem=Con.collectionShopListItem      
-         self.shoppingDate=datetime.datetime.now()
+         self.shoppingDate="2021-5-5 10:10:10"#datetime.datetime.now()
          self.ListShop=self.ListShopCurr()
          self.sumPrice= self.GetSumPrice()
          self.actualPrice=int(input("Enter actual price just numbers:")) 
@@ -62,8 +63,8 @@ class ShopListItem:
 
   def __init__(self, user1):
          self.id = id(datetime.datetime.now())
-         self.date= datetime.datetime.now()
-         self.name=input("Enter name:")
+         self.date= "2021-5-5 10:10:10"#datetime.datetime.now()
+         self.name=""#input("Enter name:")
          self.user=user1
          self.price=0
          self.quantity=1
@@ -74,8 +75,8 @@ class ShopListItem:
 class User:     
     def __init__(self):
         self.id = id(datetime.datetime.now())
-        self.name=input("Enter name user:")
-        self.passw=input("Enter name password:")
+        self.name="mor"#input("Enter name user:")
+        self.passw="123"#input("Enter name password:")
                   
 
     def addUser(self,Con):       

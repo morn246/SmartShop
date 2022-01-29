@@ -7,6 +7,7 @@ from ConnectionToMongoDB import ConnectionDB
 from pymongo import MongoClient
 from sys import exit
 import datetime
+import numpy as np
 
 
 
@@ -22,23 +23,46 @@ def menu():
             chose= int(input())  
             if(1== chose):
                 Con.printList()
-            if(2== chose):
+            elif(2== chose):
                 Con.addItemList()
-            if(3== chose):
+            elif(3== chose):
                 Con.upItemList()
-            if(4== chose):
+            elif(4== chose):
                 Con.delItemList()
-            if(5== chose):
+            elif(5== chose):
                 s=ShopClass.ShoppList(Con)               
                 Con.createList(s)
-            if(6== chose):
+            elif(6== chose):
                 exit(0)
         except Exception as e:
             print("An exception occurred ",e) 
-        
+            
+            
+
+ 
+
+
+
 Con=ConnectionDB()
 
-menu()
+
+
+Con.CalBudgetPerMonth(2021)
+#s= ShopClass.ShopListItem(Con.user)
+# shopItem={"id":s.id,"date":s.date,"name":"תה","price":Con.calPrice("תה"),"quantity":s.quantity,"user":(s.user).name,"Det":Con.getDet(s.name),"ShoppingDate":s.shoppingDate,"isDone":s.isDone}      
+# Con.collectionShopListItem.insert_one(shopItem)
+# s.nam="קורנפלור"
+# shopItem={"id":s.id,"date":s.date,"name":"שניצל","price":Con.calPrice("שניצל"),"quantity":s.quantity,"user":(s.user).name,"Det":Con.getDet(s.name),"ShoppingDate":s.shoppingDate,"isDone":s.isDone}      
+# Con.collectionShopListItem.insert_one(shopItem)
+# s.nam="שקדים"
+# shopItem={"id":s.id,"date":s.date,"name":"טחינה","price":Con.calPrice("טחינה"),"quantity":s.quantity,"user":(s.user).name,"Det":Con.getDet(s.name),"ShoppingDate":s.shoppingDate,"isDone":s.isDone}      
+# Con.collectionShopListItem.insert_one(shopItem)
+# s.nam="מוסקט"
+# shopItem={"id":s.id,"date":s.date,"name":"סטייק","price":Con.calPrice("סטייק"),"quantity":s.quantity,"user":(s.user).name,"Det":Con.getDet(s.name),"ShoppingDate":s.shoppingDate,"isDone":s.isDone}      
+# Con.collectionShopListItem.insert_one(shopItem)
+# s=ShopClass.ShoppList(Con)               
+# Con.createList(s)
+#menu()
 
 
 

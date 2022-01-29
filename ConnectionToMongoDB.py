@@ -12,6 +12,7 @@ import ShopClass
 from pymongo import MongoClient
 from sys import exit
 import datetime 
+import matplotlib.pyplot as plt
 
 def xmlPross():
         tree = et.parse("AllPrice.xml")
@@ -113,5 +114,51 @@ class ConnectionDB:
 
     def delAllItemList(self):        
         self.collectionShopListItem.delete_many({})
+        
+    def CalBudgetPerMonth(self,year):                      
+        # x axis values
+        x = np.arange(1,13)
+        # corresponding y axis values
+        results= self.collectionShopList.find({})  
+        i=1;
+        dict={}
+        y=[]
+   
+        
+        for r in results:
+            
+            date=r["shoppingDate"]
+            print(date)
+            if(year== date.year):
+                if date.month in dict.keys():
+                    dict[date.month].append(r["sumPrice"]+ dict[date.month])
+                else:
+                    dict[date.month].append(r["sumPrice"])            
+        for i in range(1,13):
+             if i in dict.keys():
+                 y.append(dict[i])
+             else:
+                 y.append(0)
+        print(y)
+             
+        # plotting the points
+        plt.plot(x, y, color='red', linestyle='dashed', linewidth = 1,
+                 marker='o', markerfacecolor='blue', markersize=12)
+         
+        # setting x and y axis range
+        plt.ylim(0,1000)
+        plt.xlim(1,12)
+         
+        # naming the x axis
+        plt.xlabel('Per Month')
+        # naming the y axis
+        plt.ylabel('Money')
+        year=2021
+        # giving a title to my graph
+        plt.title('Budger per month in '+str(year))
+         
+        # function to show the plot
+        plt.show()
+
 
    
