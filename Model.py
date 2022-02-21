@@ -39,13 +39,10 @@ class ConnectionDB:
     def __init__(self):
             
         try:
-            print("1")
             self.Dict=xmlPross()   
             conn =pymongo.MongoClient("mongodb+srv://mor:123@cluster0.rmuim.mongodb.net/ShopTop?retryWrites=true&w=majority")
-            print("2")
             conn.server_info()            
             db= conn["SmartShop"]
-            print("3")
             self.collectionUser= db["Users"]
             self.user=self.login()
             self.collectionShopList= db["ShopList"]
@@ -111,13 +108,21 @@ class ConnectionDB:
         name = input("Enter name for delete:")
         self.collectionShopListItem.delete_one({"name" : name})
 
-    def upItemList(self,ID,name,change):
+    def upItemList1(self,ID,name,change):
         
-        filter = { "name": ID }
+        filter = { "id": ID }
         newvalues = { "$set": { name: change } }
         self.collectionShopListItem.update_one(filter, newvalues)
         #self.collectionShopListItem.update_one({"name":ID},{"$set": {str(name):change}})
-
+    
+    def upItemList(self):
+        ID = input("Enter name for update price:")
+        price = input("Enter price for update:")
+        filter = { "name": str(ID) }
+        newvalues = { "$set": { "price": price } }
+        self.collectionShopListItem.update_one(filter, newvalues)
+        print("updating item successfully")
+        
     def delAllItemList(self):        
         self.collectionShopListItem.delete_many({})
         

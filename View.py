@@ -1,5 +1,4 @@
 
-
 from sys import exit
 
 def menu(C):    
@@ -11,26 +10,26 @@ def menu(C):
         "\n", "[4] Delete the item", 
         "\n", "[5] Update the budget of the shopping list", 
         "\n", "[6] Diagram of budget per month",
-         "\n", "[7] Who is the most wasteful user?",
+        # "\n", "[7] Who is the most wasteful user?",
         "\n",  "[8] Exit","\n") 
         
         try:
             chose= int(input())  
             if(1== chose):
-                C.printList()
+                C.printList1()
             elif(2== chose):
-                C.addItemList()
+                C.addItemList1()
             elif(3== chose):
-                C.upItemList()
+                C.upItemList1()
             elif(4== chose):
-                C.delItemList()
+                C.delItemList1()
             elif(5== chose):
-                C.createL()
+                C.createL1()
             elif(6== chose):
                 year= input("Enter year for budget diagran:")
-                C.clacBudget(year)
-            elif(7== chose):  
-                 C.whoIsWasteful()
+                C.clacBudget1(year)
+            #elif(7== chose):  
+                 #C.whoIsWasteful()
             elif(8== chose):
                 print("Logout.... ")
                 exit(0)

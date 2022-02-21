@@ -10,7 +10,7 @@ from sys import exit
 
     
 class ShoppList:
-     __slots__='Con','collectionShopListItem','actualPrice','id','ListShop','sumPrice','shoppingDate'
+     #__slots__='Con','collectionShopListItem','actualPrice','id','ListShop','sumPrice','shoppingDate'
      def __init__(self, Con):
          self.Con=Con
          self.collectionShopListItem=Con.collectionShopListItem 
@@ -50,8 +50,8 @@ class ShoppList:
              s["ShoppingDate"]=self.shoppingDate
              s["isDone"]=True 
             
-             self.Con.upItemList(s["id"],"isDone",True)
-             self.Con.upItemList(s["id"],"ShoppingDate",self.shoppingDate)
+             self.Con.upItemList1(s["id"],"isDone",True)
+             self.Con.upItemList1(s["id"],"ShoppingDate",self.shoppingDate)
 
          
      def GetSumPrice(self):
@@ -63,7 +63,7 @@ class ShoppList:
 
     
 class ShopListItem: 
-  __slots__='id','date','name','user','quantity','isDone','shoppingDate','price'
+  #__slots__='id','date','name','user','quantity','isDone','shoppingDate','price'
   def __init__(self, user1):
          self.id = id(datetime.datetime.now())
          self.date=datetime.datetime.now() #"2021-5-5 10:10:10"#
@@ -76,7 +76,7 @@ class ShopListItem:
   
 
 class User: 
-    __slots__='id','name','passw'   
+    #__slots__='id','name','passw'   
     def __init__(self):
         self.id = id(datetime.datetime.now())
         self.name=input("Enter name user:")
