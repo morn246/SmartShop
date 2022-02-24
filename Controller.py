@@ -2,7 +2,13 @@ import View
 import ShopClass
 from Model import ConnectionDB
 
-
+"""
+File controller:
+    runnig of SmartShop
+    call function that connect to mongodb and create object of mongoDB [Model]
+    call the menu andThe controller responds to the user input and performs interactions on  model. 
+    The controller receives the input, then passes the input to the model.  
+"""
 class IController:
     def __init__(self):
         self.Con=ConnectionDB()

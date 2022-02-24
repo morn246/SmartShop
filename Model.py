@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jan 11 13:03:57 2022
-
-@author: 97252
+File Model:
+   The model is responsible for managing the data of the application. It receives user input from the controller.
 """
 import pymongo
 import pandas as pd
@@ -14,6 +13,8 @@ from sys import exit
 import datetime 
 import matplotlib.pyplot as plt
 
+#  function that takes data from an xml file of prices in Shop
+#and creates a dictionary of a product and its price 
 def xmlPross():
         tree = et.parse("AllPrice.xml")
         root=tree.getroot()
@@ -36,8 +37,7 @@ def xmlPross():
         
 class ConnectionDB:
     
-    def __init__(self):
-            
+    def __init__(self):            
         try:
             self.Dict=xmlPross()   
             conn =pymongo.MongoClient("mongodb+srv://mor:123@cluster0.rmuim.mongodb.net/ShopTop?retryWrites=true&w=majority")
@@ -48,7 +48,7 @@ class ConnectionDB:
             self.collectionShopList= db["ShopList"]
             self.collectionShopListItem= db["ShopListItem"]
             print("*************************************************")
-            print("\n",self.user.name,", Welcome to the system SmartShop :)")
+            print("\n",self.user.name,", Welcome to SmartShop :)")
         except Exception as e:
             print("Error connection \n ", e)
             exit(0)
@@ -143,13 +143,11 @@ class ConnectionDB:
             if(year== str(date.year)):
                
                 if date.month in dict.keys():
-                    dict[date.month]=int(r["sumPrice"])+ int(dict[date.month])
-                else:
-                   
-                    num=int(r["sumPrice"])
-                    print(num, date.month)
+                    dict[date.month]=int(r["actualPrice"])+ int(dict[date.month])
+                else:                   
+                    num=int(r["actualPrice"])                   
                     dict[date.month]=(num) 
-                    print(dict)
+                    
         for i in range(1,13):
              if i in dict.keys():
                  y.append(dict[i])
@@ -171,7 +169,8 @@ class ConnectionDB:
         plt.title('Budger per month in '+str(year))        
         # function to show the plot
         plt.show()
-        
+    
+    # Future function
     def whoIsWasteful(self):
         i=0
          

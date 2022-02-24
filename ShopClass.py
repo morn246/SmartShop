@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Wed Dec 29 13:08:25 2021
-
-@author: 97252
+File ShopClass:
+  All the departments needed for the smart shopping system
+  ShopListItem- a class that puts any item you add to the purchase into the database
+  ShoppList - a department where there is all the shopping list we did and where there is the price we got the purchase and the date of purchase
+  User - Users who can log in to the system and make shopping lists rd 
 """
 import datetime 
 import itertools
@@ -19,7 +21,7 @@ class ShoppList:
               
          self.id = id(datetime.datetime.now())
         
-         self.shoppingDate=datetime.datetime.now()#"2021-05-05 10:10:10"
+         self.shoppingDate="2021-02-02 10:10:10"#datetime.datetime.now()#"2021-05-05 10:10:10"
          self.sumPrice= self.GetSumPrice()
          self.actualPrice=int(input("Enter actual price just numbers:")) 
          self.updateDoneshoppingDate()
@@ -47,7 +49,7 @@ class ShoppList:
      def updateDoneshoppingDate(self):
         
         for s in self.ListShop:           
-             s["ShoppingDate"]=self.shoppingDate
+             s["ShoppingDate"]="2021-02-02 10:10:10"#self.shoppingDate
              s["isDone"]=True 
             
              self.Con.upItemList1(s["id"],"isDone",True)
